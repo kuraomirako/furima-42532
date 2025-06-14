@@ -4,7 +4,7 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | nickname           | string     | null: false                    |
-| email              | string     | null: false, unique: true      |
+| email              | string     | null: false                    |
 | encrypted_password | string     | null: false                    |
 | last_name          | string     | null: false                    |
 | first_name         | string     | null: false                    |
@@ -57,7 +57,7 @@ has_one :shipping_address
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |
-| prefecture_id     | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     |                                |

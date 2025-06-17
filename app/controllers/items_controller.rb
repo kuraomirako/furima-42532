@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      @item = Item.new(item_params)
       @categories = Category.all
       @conditions = Condition.all
       @shipping_fees = ShippingFee.all

@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   ActiveHash::Associations
   has_one_attached :image
 
+  validates :product, presence: true
+  validates :description, presence: true
   validates :price, presence: true
   validates :image, presence: true
+  validates :category_id, :condition_id, :delivery_time_id, :prefecture_id, :shipping_fee_id,
+            numericality: { other_than: 1, message: "can't be blank" }
 end

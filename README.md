@@ -34,11 +34,11 @@ has_many :purchases
 ### association
 belongs_to :user
 has_one :purchase
-belongs_to_active_hash :category_id
-belongs_to_active_hash :condition_id
-belongs_to_active_hash :shipping_fee_id
-belongs_to_active_hash :prefecture_id
-belongs_to_active_hash :delivery_time_id
+belongs_to_active_hash :category
+belongs_to_active_hash :condition
+belongs_to_active_hash :shipping_fee
+belongs_to_active_hash :prefecture
+belongs_to_active_hash :delivery_time
 
 ## purchases テーブル (購入情報)
 | Column             | Type       | Options                        |

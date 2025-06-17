@@ -1,4 +1,37 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
+  end
+
+  def new
+    @item = Item.new
+    @categories = Category.all
+    @conditions = Condition.all
+    @shipping_fees = ShippingFee.all
+    @prefectures = Prefecture.all
+    @delivery_times = DeliveryTime.all
+  end
+
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      @item = Item.new(item_params)
+      @categories = Category.all
+      @conditions = Condition.all
+      @shipping_fees = ShippingFee.all
+      @prefectures = Prefecture.all
+      @delivery_times = DeliveryTime.all
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:product, :description, :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :price,
+                                 :delivery_time_id, :image).merge(user_id: current_user.id)
   end
 end

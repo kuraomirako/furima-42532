@@ -13,7 +13,14 @@ class Item < ApplicationRecord
 
   validates :product, presence: true
   validates :description, presence: true
-  validates :price, presence: true
+  validates :price,
+            presence: true,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 300,
+              less_than_or_equal_to: 9_999_999
+            }
+
   validates :image, presence: true
   validates :category_id, :condition_id, :delivery_time_id, :prefecture_id, :shipping_fee_id,
             numericality: { other_than: 1, message: "can't be blank" }

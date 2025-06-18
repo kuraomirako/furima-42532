@@ -24,4 +24,8 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :category_id, :condition_id, :delivery_time_id, :prefecture_id, :shipping_fee_id,
             numericality: { other_than: 1, message: "can't be blank" }
+
+  def sold_out?
+    id.even?
+  end
 end

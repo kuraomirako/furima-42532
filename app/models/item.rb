@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_fee
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :delivery_time
+  has_one :purchase
 
   ActiveHash::Associations
   has_one_attached :image

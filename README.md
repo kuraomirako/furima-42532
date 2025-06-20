@@ -53,7 +53,7 @@ belongs_to :item
 has_one :shipping_address
 
 
-## shipping_addresses テーブル (配送先情報)
+## addresses テーブル (配送先情報)
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |

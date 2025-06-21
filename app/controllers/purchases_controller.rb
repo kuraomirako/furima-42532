@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :create]
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :redirect_if_sold_out_or_owner, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -26,6 +27,12 @@ class PurchasesController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+    def redirect_if_sold_out_or_owner
+    if current_user.id == @item.user_id || (@item.sold_out? && current_user.id != @item.user_id)
+      redirect_to root_path
+    end
   end
 
   def pay_item

@@ -72,6 +72,12 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
 
+      it '英数字以外が含まれている場合は購入できない' do
+        @purchase_address.phone_number = 'あいうえおかきくけこ？'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+      end
+
       it 'userが紐づいてないと保存できないこと' do
         @purchase_address.user_id = nil
         @purchase_address.valid?

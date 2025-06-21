@@ -50,6 +50,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -83,3 +85,5 @@ gem 'devise'
 
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+gem 'payjp'
+gem 'gon'

@@ -9,6 +9,8 @@ FactoryBot.define do
     delivery_time_id { rand(2..4) }
     price            { rand(300..9_999_999) }
 
+  association :user
+
     after(:build) do |item|
       item.image.attach(
         io: File.open(Rails.root.join('spec/fixtures/test_image.png')),

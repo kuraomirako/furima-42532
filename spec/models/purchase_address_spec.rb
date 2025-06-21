@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user)
-    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user: @user)
+    @purchase_address = FactoryBot.build(:purchase_address, user_id: @user.id, item_id: @item.id)
   end
 
   describe '配送先情報の保存' do
@@ -57,15 +57,15 @@ RSpec.describe PurchaseAddress, type: :model do
       end
 
       it 'phone_numberが10文字未満だと登録できないこと' do
-        @purchase_address.phone_number = '123456789' 
+        @purchase_address.phone_number = '123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
 
-      it 'phone_numberが11文字より多いだと登録できないこと' do
+      it 'phone_numberが11文字より多いと登録できないこと' do
         @purchase_address.phone_number = '123456789012'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
       end
 
       it 'userが紐づいてないと保存できないこと' do

@@ -9,9 +9,11 @@ class PurchaseAddress
     validates :address
     validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "is invalid. Input only number" }
+    validates :phone_number, length: { minimum: 10, maximum: 11 }
   end
 
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :token, presence: true
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)

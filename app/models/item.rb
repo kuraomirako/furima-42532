@@ -27,5 +27,6 @@ class Item < ApplicationRecord
             numericality: { other_than: 1, message: "can't be blank" }
 
   def sold_out?
+    Purchase.exists?(item_id: self.id)
   end
 end

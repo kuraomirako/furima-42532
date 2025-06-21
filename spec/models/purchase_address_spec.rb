@@ -17,6 +17,10 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.building_name = ''
         expect(@purchase_address).to be_valid
       end
+
+      it "priceとtokenがあれば保存ができること" do
+        expect(@purchase_address).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -59,13 +63,13 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phone_numberが10文字未満だと登録できないこと' do
         @purchase_address.phone_number = '123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
       end
 
       it 'phone_numberが11文字より多いと登録できないこと' do
         @purchase_address.phone_number = '123456789012'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
 
       it 'userが紐づいてないと保存できないこと' do
@@ -78,6 +82,12 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では登録できないこと" do
+      @purchase_address.token = nil
+      @purchase_address.valid?
+      expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
